@@ -106,10 +106,21 @@ function caller() {
             var key = localStorage.key(i);
             if (!(key === "petition")) {
                 var retrievedObject = localStorage.getItem(key);
-                container.innerHTML = (container.innerHTML + ("<li id='" + JSON.parse(retrievedObject).id + "'><div data-role='collapsible' data-theme='c' data-content-theme='d'><h4>" + JSON.parse(retrievedObject).name + "</h4>" + "<br><p>" + "Address: " + JSON.parse(retrievedObject).address + "<br>" + "Email: " + JSON.parse(retrievedObject).email + "<br>" + "Phone: " + JSON.parse(retrievedObject).phone + "<br>" + "Feel: " + JSON.parse(retrievedObject).feel + "<br></p></div></li>"));
+                container.innerHTML = (container.innerHTML + ("<li id='" + JSON.parse(retrievedObject).id + "'><h3>" + JSON.parse(retrievedObject).name + "</h3>" + "<br><p>" + "Address: " + JSON.parse(retrievedObject).address + "<br>" + "Email: " + JSON.parse(retrievedObject).email + "<br>" + "Phone: " + JSON.parse(retrievedObject).phone + "<br>" + "Feel" + JSON.parse(retrievedObject).feel + "<br><a href='#browse' data-role='button' data-icon='delete' data-corners='true' data-theme='c' data-iconpos='notext' data-inline='true' onClick='deleteme(" + JSON.parse(retrievedObject).id + ");'>Hello</a></p></li>"));
+                
             }
         }
     }
 };
+
+function deleteme(key){
+var cm = confirm("Are you sure you want to delete this signee?");
+if (cm === true){
+	localStorage.removeItem(key);
+	document.location.reload(true);
+	}else{
+		alert("Action Cancelled");
+	}
+}
 
 window.onload = caller();
